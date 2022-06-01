@@ -8,7 +8,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
  */
 public class SistemaMedicionApp {
     /**
-     * RAMA DE DESARROLLO (development)
+     * RAMA DE PRODUCCION (main)
      */
 
     /**

@@ -1,8 +1,8 @@
-co\unicauca\sistemamedicion\dominio\ServicioMedicion.class
 co\unicauca\sistemamedicion\dominio\Actuador.class
 co\unicauca\sistemamedicion\dominio\ItemMedicionElemento.class
 co\unicauca\sistemamedicion\servidor\dominio\servicios\ServicioItemMedicion.class
 co\unicauca\sistemamedicion\dominio\IitemMedicion.class
+co\unicauca\sistemamedicion\servidor\servicio\ServicioMedicion.class
 co\unicauca\sistemamedicion\dominio\FabricaItemMedicion.class
 co\unicauca\sistemamedicion\dominio\Sensor.class
 co\unicauca\sistemamedicion\servidor\acceso\IClienteItemMedicionRepositorio.class

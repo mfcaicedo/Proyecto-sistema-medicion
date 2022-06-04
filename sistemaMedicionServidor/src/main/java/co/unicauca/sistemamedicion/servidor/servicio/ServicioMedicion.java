@@ -1,4 +1,6 @@
-package co.unicauca.sistemamedicion.dominio;
+package co.unicauca.sistemamedicion.servidor.servicio;
+
+import co.unicauca.sistemamedicion.dominio.ItemMedicionElemento;
 
 /**
  *

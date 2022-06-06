@@ -1,8 +1,9 @@
+D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicion\cliente\dominio\Disparador.java
 D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicioncliente\presentacion\SistemaMedicionApp.java
 D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicioncliente\presentacion\GUIItemMedicion.java
-D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicion\cliente\acceso\IServicioMedicion.java
+D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicion\cliente\doominio\servicio\ServicioMedicion.java
+D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicion\cliente\acceso\IServicioItemMedicion.java
 D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicioncliente\presentacion\GUIMenu.java
 D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicion\cliente\acceso\ServicioMedicionImplSocket.java
 D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicion\cliente\acceso\FabricaItemMedicion.java
-D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicion\cliente\dominio\servicio\SistemaMedicion.java
 D:\UNIVERSIDAD\SEXTO SEMESTRE\Laboratorio Ingeniería de Software II\Java Projects\Proyecto-sistema-medicion\sistemaMedicionCliente\src\main\java\co\unicauca\sistemamedicion\cliente\infra\SistemaMedicionClienteSocket.java

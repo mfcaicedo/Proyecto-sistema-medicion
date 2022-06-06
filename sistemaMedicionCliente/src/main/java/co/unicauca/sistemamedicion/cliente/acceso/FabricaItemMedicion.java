@@ -1,5 +1,6 @@
 package co.unicauca.sistemamedicion.cliente.acceso;
 
+import co.unicauca.sistemamedicion.cliente.dominio.Disparador;
 import co.unicauca.sistemamedicion.commons.infra.Utilidades;
 
 /**
@@ -30,9 +31,9 @@ public class FabricaItemMedicion {
      *
      * @return una clase hija de la abstracción IRepositorioClientes
      */
-    public IServicioMedicion obtenerItemMedicion(){
+    public IServicioItemMedicion obtenerItemMedicion(){
         
-        IServicioMedicion objResult = null; 
+        IServicioItemMedicion objResult = null; 
         String tipo = Utilidades.loadProperty("customer.service");
         
         switch (tipo){
@@ -41,6 +42,10 @@ public class FabricaItemMedicion {
                 break;
         }
         return objResult; 
+    }
+    public Disparador obtenerDisparador(){
+        Disparador objDisparador;
+        return objDisparador = new Disparador(); 
     }
     
 }

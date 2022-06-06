@@ -31,15 +31,25 @@ public class FabricaItemMedicion {
     /**
      * Métodos
      */
-    public void crearItemMedicion(){
-        
+    public IitemMedicion crearItemMedicion(){
+        String type = Utilidades.loadProperty("cliente.ItemMedicion");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IitemMedicion objItemMedicion = null;
+        switch (type) {
+            case "medidorCerveza":
+                objItemMedicion = new ItemMedicionElemento();
+                break;
+        }
+        return objItemMedicion;
     }
     /**
      * 
      * @return 
      */
     public IClienteItemMedicionRepositorio obtenerRepositorio(){
-               String type = Utilidades.loadProperty("cliente.repositorio");
+        String type = Utilidades.loadProperty("cliente.repositorio");
         if (type.isEmpty()) {
             type = "default";
         }
@@ -53,5 +63,4 @@ public class FabricaItemMedicion {
 
         return objResult;
     }
-    
 }

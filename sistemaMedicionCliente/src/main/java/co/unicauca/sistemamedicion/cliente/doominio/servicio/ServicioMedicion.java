@@ -1,13 +1,15 @@
-package co.unicauca.sistemamedicion.cliente.dominio.servicio;
+package co.unicauca.sistemamedicion.cliente.doominio.servicio;
 
-import co.unicauca.sistemamedicion.cliente.acceso.IServicioMedicion;
 import co.unicauca.sistemamedicion.comun.dominio.Elemento;
+import co.unicauca.sistemamedicion.cliente.acceso.IServicioItemMedicion;
+import co.unicauca.sistemamedicion.cliente.dominio.Disparador;
+import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
 
 /**
  *
  * @author mfcaicedo, Yazmin Gutierrez, Erika Camacho
  */
-public class SistemaMedicion {
+public class ServicioMedicion {
     
    /**
  * Es una fachada para comunicar la presentación con el
@@ -15,13 +17,13 @@ public class SistemaMedicion {
  *
  * @author mfcaicedo, bbohorquez
  */
-   private final IServicioMedicion service;
+   private final IServicioItemMedicion service;
 
     /**
      * Constructor privado que evita que otros objetos instancien
      * @param service implementacion de tipo IServicioMedicion
      */
-    public SistemaMedicion(IServicioMedicion service) {
+    public ServicioMedicion(IServicioItemMedicion service) {
         this.service = service;
     }
     /**
@@ -40,8 +42,14 @@ public class SistemaMedicion {
      * @param alerta es la alerta que se envía al servidor al llegar un elemento de medición al sistema
      * @return confirmación de que si llego la alerta 
      */
-    public String enviarAlerta(String alerta) throws Exception{
-       return service.enviarAlerta(alerta);
+//    public String enviarAlerta(String alerta) throws Exception{
+//       return service.enviarAlerta(alerta);
+//    }
+    public String deteccionElemento(Disparador disparador) throws Exception{
+        return service.deteccionElemento(disparador);
+    }
+    public String recoleccionDatos(LataCerveza cerveza) throws Exception{
+        return service.recoleccionDatos(cerveza);
     }
           
 }

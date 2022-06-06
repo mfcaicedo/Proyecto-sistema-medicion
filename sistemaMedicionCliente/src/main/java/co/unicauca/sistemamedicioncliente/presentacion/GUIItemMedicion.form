@@ -65,29 +65,43 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" min="-2" pref="921" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonIniciarSimulacion" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel3" alignment="0" min="-2" pref="432" max="-2" attributes="0"/>
-                              <Component id="jScrollPaneInfoDatosOptimos" alignment="0" min="-2" pref="480" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelAltura" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAncho" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtxtAltura" pref="194" max="32767" attributes="0"/>
+                                      <Component id="jtxtAncho" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabelPeso" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jtxtPeso" min="-2" pref="187" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jButtonMuestra" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel3" alignment="0" min="-2" pref="432" max="-2" attributes="0"/>
+                                  <Component id="jScrollPaneInfoDatosOptimos" alignment="0" min="-2" pref="480" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
                               <Component id="jScrollPaneInfoElementDefectuosos" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelAlerta" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jtxtAlerta" min="-2" pref="194" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButtonIniciarDisparador" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -98,16 +112,23 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonIniciarDisparador" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelAlerta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtxtAlerta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonIniciarSimulacion" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabelAltura" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jtxtAltura" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtxtPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="58" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelAncho" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtxtAncho" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonMuestra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -125,30 +146,14 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButtonIniciarDisparador">
+        <Component class="javax.swing.JButton" name="jButtonIniciarSimulacion">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Disparador"/>
+            <Property name="text" type="java.lang.String" value="Iniciar simulaci&#xf3;n"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonIniciarDisparadorActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonIniciarSimulacionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Informaci&#xf3;n del &#xfa;ltimo elemento que ingresa al sistema"/>
-          </Properties>
-        </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTextPane" name="jTextPaneInfoElemento">
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tabla de resultados "/>
@@ -203,12 +208,37 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabelAlerta">
+        <Component class="javax.swing.JLabel" name="jLabelAltura">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Alerta:"/>
+            <Property name="text" type="java.lang.String" value="Altura:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtxtAlerta">
+        <Component class="javax.swing.JTextField" name="jtxtAltura">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxtAlturaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelAncho">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ancho:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtxtAncho">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelPeso">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Peso:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtxtPeso">
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonMuestra">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Enviar muestra"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMuestraActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

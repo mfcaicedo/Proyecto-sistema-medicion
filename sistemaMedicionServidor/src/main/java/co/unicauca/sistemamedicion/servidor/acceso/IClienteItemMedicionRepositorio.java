@@ -12,6 +12,6 @@ public interface IClienteItemMedicionRepositorio {
      * Métodos 
      */
     public Elemento obtenerItemMedicion(String referencia);
-    public String enviarAlerta(String alerta);
+//    public String enviarAlerta(String alerta);
     
 }

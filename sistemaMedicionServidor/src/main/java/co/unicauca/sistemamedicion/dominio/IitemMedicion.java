@@ -5,6 +5,8 @@
  */
 package co.unicauca.sistemamedicion.dominio;
 
+import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
+
 /**
  *
  * @author Miltohn F Caicedo 
@@ -19,5 +21,8 @@ public interface IitemMedicion {
     public void almacenarResultados();
     public void compararValores();
     public void ejecutarAcciones();
+    public LataCerveza recolectarDatos(LataCerveza cerveza);
+    public void analisisDatos(LataCerveza cerveza);
+//        public Sensor addSensor();
     
 }

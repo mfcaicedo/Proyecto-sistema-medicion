@@ -2,6 +2,7 @@ package co.unicauca.sistemamedicion.dominio;
 
 import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -65,23 +66,28 @@ public class ItemMedicionElemento implements IitemMedicion {
      * Métodos
      */
     @Override
-    public void procesarMedicion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public LataCerveza procesarMedicion(LataCerveza cerveza) {
+        ArrayList<Float> lstErrores = new ArrayList<>();
+        //1. Recolectar datos (agregamos el sensor y el actuador)
+        cerveza = recolectarDatos(cerveza);
+        //2. Analisis de datos y transformación de datos 
+        analisisDatos(cerveza);
+        //3. Compara los valores 
+        lstErrores = compararValores();
+        //4. Clasificación de los elementos 
+        cerveza = clasificarElemento(cerveza, lstErrores);
+        return cerveza;
     }
 
     @Override
-    public void leerSensor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Sensor leerSensor(Sensor sensor) {
+        //se haría la lectura. 
+        return sensor;
     }
 
     @Override
     public void almacenarResultados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void compararValores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Atención: en construcción..");
     }
 
     @Override
@@ -96,6 +102,7 @@ public class ItemMedicionElemento implements IitemMedicion {
     @Override
     public LataCerveza recolectarDatos(LataCerveza cerveza) {
         SensorCamara objCamara = new SensorCamara(cerveza);
+        objCamara = (SensorCamara) leerSensor(objCamara); //mirar si lo hace bien
         cerveza = objCamara.recoleccionDatos(cerveza);
         this.lstSensores.add(objCamara);
         return cerveza;
@@ -113,12 +120,50 @@ public class ItemMedicionElemento implements IitemMedicion {
         this.lstValoresReales.add(cerveza.getPeso());
         cargarValoresIdeales();
     }
-    public void cargarValoresIdeales(){
+    private void cargarValoresIdeales(){
         //Consulta al archivo 
-        LataCerveza cerveza = new LataCerveza("", "", "",12.0f, 6.0f, 0.33f);
+        LataCerveza cerveza = new LataCerveza("", "", "",12.22f, 5.24f, 0.33f);
         this.lstValoresIdeales.add(cerveza.getAltura());
         this.lstValoresIdeales.add(cerveza.getAncho());
         this.lstValoresIdeales.add(cerveza.getPeso());
+    }
+    /**
+     * Compara los valores reales y los ideales 
+     * @return 
+     */
+    @Override
+    public ArrayList<Float> compararValores() {
+        ArrayList<Float> lstErrores = new ArrayList<>();
+        float errorAltura = 0.0f;
+        float errorAncho = 0.0f;
+        float errorPeso = 0.0f;
+        for (int i = 0; i<lstValoresReales.size(); i+=3) {
+            //Comparo
+            //Toleracia a un error de 3%
+            errorAltura = Math.abs((lstValoresIdeales.get(i) - lstValoresReales.get(i))/(lstValoresIdeales.get(i)));
+            errorAncho = Math.abs((lstValoresIdeales.get(i+1) - lstValoresReales.get(i+1))/(lstValoresIdeales.get(i+1)));
+            errorPeso = Math.abs((lstValoresIdeales.get(i+2) - lstValoresReales.get(i+2))/(lstValoresIdeales.get(i+2)));
+        }
+        lstErrores.add(errorAltura);
+        lstErrores.add(errorAncho);
+        lstErrores.add(errorPeso);
+        
+        return lstErrores;
+    }
+    /**
+    * Clasifica el elemento según valores arrojados (optimo o detectuoso)
+    * @param cerveza 
+    * @return  
+    */
+    @Override
+    public LataCerveza clasificarElemento(LataCerveza cerveza, ArrayList<Float> lstComparaciones){
+            
+        if (lstComparaciones.get(0) <= 0.03 && lstComparaciones.get(1) <= 0.03 && lstComparaciones.get(2) <= 0.03) {
+            cerveza.setEstado("optimo");
+        }else{
+            cerveza.setEstado("defectouso");
+        }
+        return cerveza;
     }
 
     

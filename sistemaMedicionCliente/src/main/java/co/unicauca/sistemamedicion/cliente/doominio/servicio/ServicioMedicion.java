@@ -2,7 +2,7 @@ package co.unicauca.sistemamedicion.cliente.doominio.servicio;
 
 import co.unicauca.sistemamedicion.comun.dominio.Elemento;
 import co.unicauca.sistemamedicion.cliente.acceso.IServicioItemMedicion;
-import co.unicauca.sistemamedicion.cliente.dominio.Disparador;
+import co.unicauca.sistemamedicion.comun.dominio.Disparador;
 import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
 
 /**

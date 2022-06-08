@@ -1,8 +1,7 @@
-package co.unicauca.sistemamedicion.cliente.dominio;
-
+package co.unicauca.sistemamedicion.comun.dominio;
 /**
  *
- * @author milthon F caicedo 
+ * @author milthon F caicedo, Erika Camacho, Yazmin Gutierrez, Brandon Nicolas, Juan Medicis
  */
 public class Disparador {
     private String peticion;

@@ -1,7 +1,7 @@
 
 package co.unicauca.sistemamedicion.cliente.acceso;
 
-import co.unicauca.sistemamedicion.cliente.dominio.Disparador;
+import co.unicauca.sistemamedicion.comun.dominio.Disparador;
 import co.unicauca.sistemamedicion.cliente.infra.SistemaMedicionClienteSocket;
 import co.unicauca.sistemamedicion.commons.infra.JsonError;
 import co.unicauca.sistemamedicion.commons.infra.Protocolo;

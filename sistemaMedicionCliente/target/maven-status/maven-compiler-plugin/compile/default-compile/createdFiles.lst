@@ -3,7 +3,6 @@ co\unicauca\sistemamedicioncliente\presentacion\GUIItemMedicion$3.class
 co\unicauca\sistemamedicion\cliente\infra\SistemaMedicionClienteSocket.class
 co\unicauca\sistemamedicion\cliente\acceso\IServicioItemMedicion.class
 co\unicauca\sistemamedicion\cliente\acceso\FabricaItemMedicion.class
-co\unicauca\sistemamedicion\cliente\dominio\Disparador.class
 co\unicauca\sistemamedicion\cliente\doominio\servicio\ServicioMedicion.class
 co\unicauca\sistemamedicioncliente\presentacion\GUIMenu$2.class
 co\unicauca\sistemamedicioncliente\presentacion\SistemaMedicionApp.class

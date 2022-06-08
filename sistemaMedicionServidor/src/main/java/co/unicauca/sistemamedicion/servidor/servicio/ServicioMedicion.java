@@ -1,11 +1,6 @@
 package co.unicauca.sistemamedicion.servidor.servicio;
 
-import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
-import co.unicauca.sistemamedicion.dominio.Disparador;
-import co.unicauca.sistemamedicion.dominio.FabricaItemMedicion;
-import co.unicauca.sistemamedicion.dominio.IitemMedicion;
-import co.unicauca.sistemamedicion.dominio.ItemMedicionElemento;
-import co.unicauca.sistemamedicion.servidor.acceso.IClienteItemMedicionRepositorio;
+import co.unicauca.sistemamedicion.comun.dominio.Disparador;
 
 /**
  *

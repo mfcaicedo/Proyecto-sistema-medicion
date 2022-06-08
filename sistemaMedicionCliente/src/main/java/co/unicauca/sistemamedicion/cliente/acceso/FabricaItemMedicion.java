@@ -1,6 +1,5 @@
 package co.unicauca.sistemamedicion.cliente.acceso;
 
-import co.unicauca.sistemamedicion.cliente.dominio.Disparador;
 import co.unicauca.sistemamedicion.commons.infra.Utilidades;
 
 /**
@@ -42,10 +41,6 @@ public class FabricaItemMedicion {
                 break;
         }
         return objResult; 
-    }
-    public Disparador obtenerDisparador(){
-        Disparador objDisparador;
-        return objDisparador = new Disparador(); 
     }
     
 }

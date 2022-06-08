@@ -6,6 +6,7 @@
 package co.unicauca.sistemamedicion.dominio;
 
 import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,13 +17,13 @@ public interface IitemMedicion {
     /**
      * Métodos 
      */
-    public void procesarMedicion();
-    public void leerSensor();
+    public LataCerveza procesarMedicion(LataCerveza cerveza);
+    public Sensor leerSensor(Sensor sensor);
     public void almacenarResultados();
-    public void compararValores();
+    public ArrayList<Float> compararValores();
     public void ejecutarAcciones();
     public LataCerveza recolectarDatos(LataCerveza cerveza);
     public void analisisDatos(LataCerveza cerveza);
-//        public Sensor addSensor();
+    public LataCerveza clasificarElemento(LataCerveza cerveza, ArrayList<Float> lstComparaciones);
     
 }

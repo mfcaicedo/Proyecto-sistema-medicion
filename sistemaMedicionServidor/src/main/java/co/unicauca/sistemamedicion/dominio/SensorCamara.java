@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.sistemamedicion.dominio;
 
 import co.unicauca.sistemamedicion.comun.dominio.Elemento;
@@ -22,10 +17,8 @@ public class SensorCamara extends Sensor{
     @Override
     public LataCerveza recoleccionDatos(LataCerveza cerveza){
         
-        //devolver hasta el item y hacer comparaciones
-        
-        cerveza.setReferencia("element1");
-        cerveza.setEstado("optimo");
+        double ref = Math.random()*100;
+        cerveza.setReferencia(String.valueOf(ref));
         cerveza.setTipo("lata");
         
         return cerveza;

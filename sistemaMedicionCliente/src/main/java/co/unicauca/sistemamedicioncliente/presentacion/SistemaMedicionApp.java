@@ -42,7 +42,8 @@ public class SistemaMedicionApp {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 GUIMenu ins = new GUIMenu();
-                ins.setExtendedState(MAXIMIZED_BOTH); //maximiza el ancho 
+                ins.setLocationRelativeTo(null);
+//                ins.setExtendedState(MAXIMIZED_BOTH); //maximiza el ancho 
                 ins.setVisible(true);
                 
             }

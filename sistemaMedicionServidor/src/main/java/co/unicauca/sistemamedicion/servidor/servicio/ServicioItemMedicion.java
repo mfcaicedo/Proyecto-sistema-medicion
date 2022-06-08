@@ -48,12 +48,7 @@ public class ServicioItemMedicion {
      * @return 
      */
     public LataCerveza procesoMedicion(LataCerveza cerveza){
-        
-        //1. Recolectar datos 
-        cerveza = recolectarDatos(cerveza);
-        //2. Analisis de datos y transformación de datos 
-        analisisDatos(cerveza);
-        
+        cerveza = objItemMedicion.procesarMedicion(cerveza);
         return cerveza;
     }
     /**
@@ -61,16 +56,19 @@ public class ServicioItemMedicion {
      * @param cerveza
      * @return 
      */
-    public LataCerveza recolectarDatos(LataCerveza cerveza){
-        return objItemMedicion.recolectarDatos(cerveza);
-    }
-    /**
-     * 
-     * @param cerveza 
-     */
-    public void analisisDatos(LataCerveza cerveza){
-        objItemMedicion.analisisDatos(cerveza);
-    }
+//    public LataCerveza recolectarDatos(LataCerveza cerveza){
+//        return objItemMedicion.recolectarDatos(cerveza);
+//    }
+//    /**
+//     * 
+//     * @param cerveza 
+//     */
+//    public void analisisDatos(LataCerveza cerveza){
+//        objItemMedicion.analisisDatos(cerveza);
+//    }
+//    public LataCerveza clasificarElemento(LataCerveza cerveza){
+//        return objItemMedicion.clasificarElemento(cerveza);
+//    }
      /**
      * Buscar un Elemento de Medición
      *
@@ -79,10 +77,7 @@ public class ServicioItemMedicion {
      */
     public Elemento obtenerItemMedicion(String ref) {
         return objRepo.obtenerItemMedicion(ref);
-        //hice un cambio 
-        //otro cambio sdklfjsdaklf sadf
-        
-        //sadfldfs
     }
+    
 
 }

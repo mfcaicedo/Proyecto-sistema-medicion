@@ -5,11 +5,14 @@
  */
 package co.unicauca.sistemamedicion.dominio;
 
+import co.unicauca.sistemamedicion.comun.dominio.Elemento;
+import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
+
 /**
  *
  * @author Milthon F Caicedo 
  */
-public class Sensor {
+public abstract class Sensor {
     
     /**
      * Atributos 
@@ -25,8 +28,6 @@ public class Sensor {
     /**
      * Métodos
      */
-    public void recoleccionDatos(){
-        
-    }
+    public abstract Elemento recoleccionDatos(LataCerveza cerveza);
     
 }

@@ -17,13 +17,13 @@ public class ClienteItemMedicionRepositorioImplArchivos implements IClienteItemM
      * @param alerta alerta que ha recibido desde el cliente 
      * @return respuesta de que si recibió la alerta para realizar acciones
      */
-    @Override
-    public String enviarAlerta(String alerta) {
-        if(alerta.equals("alerta")){
-            String respuesta = "correcto";
-            return respuesta;
-        }
-      return "incorrecto";
-    }
+//    @Override
+//    public String enviarAlerta(String alerta) {
+//        if(alerta.equals("alerta")){
+//            String respuesta = "correcto";
+//            return respuesta;
+//        }
+//      return "incorrecto";
+//    }
     
 }

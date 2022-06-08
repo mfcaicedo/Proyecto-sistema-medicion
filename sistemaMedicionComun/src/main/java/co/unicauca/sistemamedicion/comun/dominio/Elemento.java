@@ -9,30 +9,33 @@ package co.unicauca.sistemamedicion.comun.dominio;
  *
  * @author Milthon F Caicedo 
  */
-public class Elemento {
+public abstract class Elemento {
     
     /**
      * Atributos 
      */
-    private String nombre; 
+    private String tipo; 
     private String estado; 
     private String referencia;
     /**
      * Constructor 
      */
-    public Elemento(){
-        
+    public Elemento(){}
+    public Elemento(String tipo, String estado, String referencia){
+        this.tipo = tipo;
+        this.estado = estado; 
+        this.referencia = referencia; 
     }
     /**
      * Geters and setters
      * @return 
      */
-    public String getNombre() {
-        return nombre;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getEstado() {
@@ -49,6 +52,15 @@ public class Elemento {
 
     public void setReferencia(String referencia) {
         this.referencia = referencia;
+    }
+    /**
+     * Métods 
+     */
+    public boolean comprobarCalidad(){
+        return false; 
+    }
+    public void obtenerDatos(){
+        
     }
     
 }

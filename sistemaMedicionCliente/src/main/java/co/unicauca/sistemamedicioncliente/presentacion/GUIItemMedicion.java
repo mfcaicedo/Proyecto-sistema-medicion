@@ -6,23 +6,33 @@
 package co.unicauca.sistemamedicioncliente.presentacion;
 
 import co.unicauca.sistemamedicion.cliente.acceso.FabricaItemMedicion;
-import co.unicauca.sistemamedicion.cliente.acceso.IServicioMedicion;
-import co.unicauca.sistemamedicion.cliente.dominio.servicio.SistemaMedicion;
+import co.unicauca.sistemamedicion.cliente.doominio.servicio.ServicioMedicion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import co.unicauca.sistemamedicion.cliente.acceso.IServicioItemMedicion;
+import co.unicauca.sistemamedicion.commons.infra.Protocolo;
+import co.unicauca.sistemamedicion.comun.dominio.Disparador;
+import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
+import com.google.gson.Gson;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mfcaicedo
  */
 public class GUIItemMedicion extends javax.swing.JInternalFrame {
-
+    
+    /**
+     * Atributos 
+     */
+    ServicioMedicion servicioMedicion;
     /**
      * Creates new form GUIItemMedicion
      */
     public GUIItemMedicion() {
         initComponents();
+        this.jButtonMuestra.setVisible(false);
     }
 
     /**
@@ -35,10 +45,7 @@ public class GUIItemMedicion extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanelCentral = new javax.swing.JPanel();
-        jButtonIniciarDisparador = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPaneInfoElemento = new javax.swing.JTextPane();
+        jButtonIniciarSimulacion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -46,56 +53,70 @@ public class GUIItemMedicion extends javax.swing.JInternalFrame {
         jTableInfoElementOptimos = new javax.swing.JTable();
         jScrollPaneInfoElementDefectuosos = new javax.swing.JScrollPane();
         jTableInfoElementDefectuosos = new javax.swing.JTable();
-        jLabelAlerta = new javax.swing.JLabel();
-        jtxtAlerta = new javax.swing.JTextField();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jLabelAltura = new javax.swing.JLabel();
+        jtxtAltura = new javax.swing.JTextField();
+        jLabelAncho = new javax.swing.JLabel();
+        jtxtAncho = new javax.swing.JTextField();
+        jLabelPeso = new javax.swing.JLabel();
+        jtxtPeso = new javax.swing.JTextField();
+        jButtonMuestra = new javax.swing.JButton();
 
-        jButtonIniciarDisparador.setText("Disparador");
-        jButtonIniciarDisparador.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIniciarSimulacion.setBackground(new java.awt.Color(54, 102, 167));
+        jButtonIniciarSimulacion.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonIniciarSimulacion.setText("Iniciar simulación");
+        jButtonIniciarSimulacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIniciarDisparadorActionPerformed(evt);
+                jButtonIniciarSimulacionActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Información del último elemento que ingresa al sistema");
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Impresión de resultados ");
 
-        jScrollPane1.setViewportView(jTextPaneInfoElemento);
+        jLabel3.setText("Latas en estado Optimo");
 
-        jLabel2.setText("Tabla de resultados ");
-
-        jLabel3.setText("Elementos en estado Optimo");
-
-        jLabel4.setText("Elementos en estado defectuoso");
+        jLabel4.setText("Latas en estado defectuoso");
 
         jTableInfoElementOptimos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Alto(cm)", "Ancho(cm)", "Peso(kg)", "Estado", "Tipo"
             }
         ));
         jScrollPaneInfoDatosOptimos.setViewportView(jTableInfoElementOptimos);
 
         jTableInfoElementDefectuosos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Alto(cm)", "Ancho(cm)", "Peso(kg)", "Estado", "Tipo"
             }
         ));
         jScrollPaneInfoElementDefectuosos.setViewportView(jTableInfoElementDefectuosos);
 
-        jLabelAlerta.setText("Alerta:");
+        jLabelAltura.setText("Altura(cm):");
+
+        jtxtAltura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtAlturaActionPerformed(evt);
+            }
+        });
+
+        jLabelAncho.setText("Ancho(cm):");
+
+        jLabelPeso.setText("Peso(kg):");
+
+        jButtonMuestra.setBackground(new java.awt.Color(54, 102, 167));
+        jButtonMuestra.setText("Enviar muestra");
+        jButtonMuestra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMuestraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCentralLayout = new javax.swing.GroupLayout(jPanelCentral);
         jPanelCentral.setLayout(jPanelCentralLayout);
@@ -103,39 +124,55 @@ public class GUIItemMedicion extends javax.swing.JInternalFrame {
             jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCentralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelCentralLayout.createSequentialGroup()
                         .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPaneInfoDatosOptimos, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
+                            .addComponent(jLabelAltura)
+                            .addComponent(jLabelAncho))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPaneInfoElementDefectuosos)))
-                    .addGroup(jPanelCentralLayout.createSequentialGroup()
-                        .addComponent(jLabelAlerta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonIniciarDisparador)))
+                            .addComponent(jtxtAltura, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(jtxtAncho))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelCentralLayout.createSequentialGroup()
+                                .addComponent(jLabelPeso)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtxtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonMuestra)))
+                    .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPaneInfoDatosOptimos, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
+                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneInfoElementDefectuosos))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanelCentralLayout.createSequentialGroup()
+                .addComponent(jButtonIniciarSimulacion)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanelCentralLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelCentralLayout.setVerticalGroup(
             jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCentralLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
+                .addComponent(jButtonIniciarSimulacion)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonIniciarDisparador)
-                    .addComponent(jLabelAlerta)
-                    .addComponent(jtxtAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
+                    .addComponent(jtxtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPeso)
+                    .addComponent(jtxtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAltura))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAncho)
+                    .addComponent(jtxtAncho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonMuestra))
+                .addGap(36, 36, 36)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -143,89 +180,154 @@ public class GUIItemMedicion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneInfoElementDefectuosos, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneInfoElementDefectuosos, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                     .addComponent(jScrollPaneInfoDatosOptimos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 980, Short.MAX_VALUE)
+            .addGap(0, 1038, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addGap(0, 515, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 8, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void deteccionElemento(){
+        String peticion = "start";
+        Disparador objDisparador = new Disparador();
+        IServicioItemMedicion objItemMedicion;
+        objItemMedicion = FabricaItemMedicion.getInstance().obtenerItemMedicion();
+        objDisparador.deteccionElemento(peticion);
+        // Inyecta la dependencia
+        servicioMedicion = new ServicioMedicion(objItemMedicion);
+        
+        //Eviamos la petición 
+        String respuesta = "";
+        try {
+            respuesta = servicioMedicion.deteccionElemento(objDisparador); 
+        } catch (Exception ex) {
+            Logger.getLogger(GUIItemMedicion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Según la respuesta del servidor tomo decisiones 
+        if (respuesta.equals("datos")) {
+            //Eviamos los datos de la muestra al servidor
+            JOptionPane.showMessageDialog(this, "Esperando "+respuesta,"Respuesta servidor",JOptionPane.INFORMATION_MESSAGE);
+             this.jButtonMuestra.setVisible(true);    
+        }else{
+            JOptionPane.showMessageDialog(this, respuesta,"Respuesta servidor",JOptionPane.INFORMATION_MESSAGE);
+        }  
+    }   
+    private void recolectarDatos(){
+        String respuesta = "";
+        if (servicioMedicion != null) {
+            
+            LataCerveza objCerveza = new LataCerveza();   
+            try{
+                if (this.jtxtAltura.getText() != null && this.jtxtAncho.getText() != "" && this.jtxtPeso.getText() != "" ) {
+                    objCerveza.setAltura(Float.parseFloat(this.jtxtAltura.getText()));
+                    objCerveza.setAncho(Float.parseFloat(this.jtxtAncho.getText()));
+                    objCerveza.setPeso(Float.parseFloat(this.jtxtPeso.getText()));                          
+                    respuesta = servicioMedicion.recoleccionDatos(objCerveza);
+                    JOptionPane.showMessageDialog(this, respuesta,"Respuesta servidor",JOptionPane.INFORMATION_MESSAGE);
+                    mostrarInfoResultado(respuesta);
+                }
+                
+            }catch(Exception e){
+                System.out.println("Verificar datos");
+            }
+           
+            
+        }
+        
+    }
+    /**
+     * Mostrar datos del resultado 
+     * @param 
+     */
+    private void mostrarInfoResultado(String respuesta){
+        Gson gson = new Gson();
+        LataCerveza cerveza = gson.fromJson(respuesta, LataCerveza.class);
+        cargarTabla(cerveza);
+    }
+    private void cargarTabla(LataCerveza cerveza){ 
+        Object [] fila = new Object[5];
+        fila[0] = cerveza.getAltura();
+        fila[1] = cerveza.getAncho();
+        fila[2] = cerveza.getPeso();
+        fila[3] = cerveza.getEstado();
+        fila[4] = cerveza.getTipo();
+        //Depende del estado lo agrega a la tabla de optimos o defectuosos
+        if (cerveza.getEstado().equals("optimo")) {
+            System.out.println("entra al optimo");
+            DefaultTableModel modelo =(DefaultTableModel) this.jTableInfoElementOptimos.getModel(); 
+            modelo.addRow(fila); 
+            this.jTableInfoElementOptimos.setModel(modelo);
+        }else{
+            DefaultTableModel modelo =(DefaultTableModel) this.jTableInfoElementDefectuosos.getModel(); 
+            modelo.addRow(fila); 
+            this.jTableInfoElementDefectuosos.setModel(modelo);
+        }
+    
+    }
+    
     /**
      * Accion del disparador 
      * @param evt 
      */
-    private void jButtonIniciarDisparadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarDisparadorActionPerformed
+    private void jButtonIniciarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSimulacionActionPerformed
         
         // TODO add your handling code here:
-        String alerta = this.jtxtAlerta.getText().trim();
-        IServicioMedicion objItemMedicion;
-        objItemMedicion = FabricaItemMedicion.getInstance().obtenerItemMedicion();
-        // Inyecta la dependencia
-        SistemaMedicion sistemaMedicion = new SistemaMedicion(objItemMedicion);
+         deteccionElemento();
+    }//GEN-LAST:event_jButtonIniciarSimulacionActionPerformed
 
-        //Eviamos la alerta
-        String respuesta = "";
-        try {
-            respuesta = sistemaMedicion.enviarAlerta(alerta);  //encuentra al cliente y luego hace la solicitud con el socket
-        } catch (Exception ex) {
-            Logger.getLogger(GUIItemMedicion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //Mostramos la respuesta del servidor 
-        JOptionPane.showMessageDialog(this, respuesta,"Respuesta servidor",JOptionPane.INFORMATION_MESSAGE);
-        
-            
-        
-    }//GEN-LAST:event_jButtonIniciarDisparadorActionPerformed
+   
+    
+    private void jtxtAlturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtAlturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtAlturaActionPerformed
+    /**
+    * Accion del boton muestra de datos 
+    * @param evt 
+    */
+    private void jButtonMuestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMuestraActionPerformed
+        // TODO add your handling code here:
+        recolectarDatos();
+    }//GEN-LAST:event_jButtonMuestraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonIniciarDisparador;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonIniciarSimulacion;
+    private javax.swing.JButton jButtonMuestra;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabelAlerta;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel jLabelAltura;
+    private javax.swing.JLabel jLabelAncho;
+    private javax.swing.JLabel jLabelPeso;
     private javax.swing.JPanel jPanelCentral;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneInfoDatosOptimos;
     private javax.swing.JScrollPane jScrollPaneInfoElementDefectuosos;
     private javax.swing.JTable jTableInfoElementDefectuosos;
     private javax.swing.JTable jTableInfoElementOptimos;
-    private javax.swing.JTextPane jTextPaneInfoElemento;
-    private javax.swing.JTextField jtxtAlerta;
+    private javax.swing.JTextField jtxtAltura;
+    private javax.swing.JTextField jtxtAncho;
+    private javax.swing.JTextField jtxtPeso;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -17,6 +17,7 @@ public class GUIMenu extends javax.swing.JFrame {
      * Creates new form GUIMenu
      */
     public GUIMenu() {
+        this.setLocationRelativeTo(this);
         initComponents();
     }
 
@@ -30,6 +31,7 @@ public class GUIMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopEscritorio = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemIniciarSimulacion = new javax.swing.JMenuItem();
@@ -39,15 +41,33 @@ public class GUIMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jDesktopEscritorio.setMinimumSize(new java.awt.Dimension(400, 600));
+        jDesktopEscritorio.setPreferredSize(new java.awt.Dimension(1200, 700));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 255));
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("SIMULADOR SISTEMA DE MEDECIÓN DE LATAS DE CERVEZA");
+        jLabel1.setToolTipText("");
+
+        jDesktopEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopEscritorioLayout = new javax.swing.GroupLayout(jDesktopEscritorio);
         jDesktopEscritorio.setLayout(jDesktopEscritorioLayout);
         jDesktopEscritorioLayout.setHorizontalGroup(
             jDesktopEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 980, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopEscritorioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jDesktopEscritorioLayout.setVerticalGroup(
             jDesktopEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
+            .addGroup(jDesktopEscritorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(659, Short.MAX_VALUE))
         );
 
         getContentPane().add(jDesktopEscritorio, java.awt.BorderLayout.PAGE_START);
@@ -61,7 +81,7 @@ public class GUIMenu extends javax.swing.JFrame {
             }
         });
 
-        jMenuItemIniciarSimulacion.setText("Iniciar Simulación");
+        jMenuItemIniciarSimulacion.setText("Simulación");
         jMenuItemIniciarSimulacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemIniciarSimulacionActionPerformed(evt);
@@ -100,6 +120,7 @@ public class GUIMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         GUIItemMedicion objGUIItemMedicion = new GUIItemMedicion();
         objGUIItemMedicion.setMaximizable(true);
+        objGUIItemMedicion.setLocation(90, 50);
         this.jDesktopEscritorio.add(objGUIItemMedicion);
         objGUIItemMedicion.show();                             
         
@@ -112,6 +133,7 @@ public class GUIMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopEscritorio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;

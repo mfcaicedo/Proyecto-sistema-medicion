@@ -3,10 +3,14 @@ package co.unicauca.sistemamedicion.servidor.infra;
 import co.unicauca.sistemamedicion.commons.infra.JsonError;
 import co.unicauca.sistemamedicion.commons.infra.Protocolo;
 import co.unicauca.sistemamedicion.commons.infra.Utilidades;
+import co.unicauca.sistemamedicion.comun.dominio.Disparador;
 import co.unicauca.sistemamedicion.comun.dominio.Elemento;
+import co.unicauca.sistemamedicion.comun.dominio.LataCerveza;
 import co.unicauca.sistemamedicion.dominio.FabricaItemMedicion;
+import co.unicauca.sistemamedicion.dominio.IitemMedicion;
 import co.unicauca.sistemamedicion.servidor.acceso.IClienteItemMedicionRepositorio;
-import co.unicauca.sistemamedicion.servidor.dominio.servicios.ServicioItemMedicion;
+import co.unicauca.sistemamedicion.servidor.servicio.ServicioItemMedicion;
+import co.unicauca.sistemamedicion.servidor.servicio.ServicioMedicion;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -27,9 +31,14 @@ import java.util.List;
 public class SistemaMedicionServidorSocket implements Runnable {
 
     /**
+     * Servicio de disparador
+     */
+    private final ServicioMedicion servicioMedicion;
+    Disparador objDispador;
+    /**
      * Servicio de clientes
      */
-    private final ServicioItemMedicion servicio;
+    private final ServicioItemMedicion servicioItem;
     /**
      * Server Socket
      */
@@ -57,7 +66,10 @@ public class SistemaMedicionServidorSocket implements Runnable {
     public SistemaMedicionServidorSocket() {
         // Se hace la inyección de dependencia
         IClienteItemMedicionRepositorio repositorio = FabricaItemMedicion.getInstance().obtenerRepositorio();
-        servicio = new ServicioItemMedicion(repositorio);
+        IitemMedicion itemMedicion = FabricaItemMedicion.getInstance().crearItemMedicion();
+        servicioItem = new ServicioItemMedicion(repositorio,itemMedicion);
+        objDispador = new Disparador();
+        servicioMedicion = new ServicioMedicion(objDispador);
     }
     /**
      * Arranca el servidor y hace la estructura completa
@@ -139,7 +151,7 @@ public class SistemaMedicionServidorSocket implements Runnable {
      *
      * @param requestJson petición que proviene del cliente socket en formato
      * json que viene de esta manera:
-     * "{"resource":"aAlerta","action":"alerta","parameters":"
+     * "{"resource":"disparador","action":"start","parameters":"
      */
     private void processRequest(String requestJson) {
         // Convertir la solicitud a objeto Protocol para poderlo procesar
@@ -147,10 +159,13 @@ public class SistemaMedicionServidorSocket implements Runnable {
         Protocolo protocolRequest = gson.fromJson(requestJson, Protocolo.class);
 
         switch (protocolRequest.getResource()) {
-            case "peticion":
-                if (protocolRequest.getAction().equals("alerta")) {
+            case "cliente":
+                if (protocolRequest.getAction().equals("start")) {
                     // Activar acciones de los dispositivos del sistema 
-                    processEnviarAlerta(protocolRequest);
+                    processDeteccionElemento(protocolRequest);
+                }
+                if (protocolRequest.getAction().equals("post")) {
+                    processRecoleccionDatos(protocolRequest);
                 }
                 if (protocolRequest.getAction().equals("get")) {
                     // Obtener un elemento    
@@ -160,29 +175,39 @@ public class SistemaMedicionServidorSocket implements Runnable {
         }
 
     }
+        
     /**
-     * Procesa la solicitud de enviar alerta
-     *
-     * @param protocolRequest Protocolo de la solicitud
+     *Proce la solicitud de deteccion elemento.  
+     * @param protocolRequest 
      */
-    private void processEnviarAlerta(Protocolo protocolRequest){
-        String alerta = protocolRequest.getAction();
-        String respuesta = servicio.enviarAlerta(alerta);
-        if (respuesta.equals("correcto")) {
-            output.println(respuesta);
-//            output.println(objectToJSON(respuesta));
+    private void processDeteccionElemento(Protocolo protocolRequest){
+        objDispador.setPeticion(protocolRequest.getAction());
+        String peticion = servicioMedicion.deteccionElemento(objDispador.getPeticion());
+        if (peticion.equals("datos")) {
+            output.println(peticion);
         }
+        
+    }
+    private void processRecoleccionDatos(Protocolo protocolRequest){
+        LataCerveza cerveza = new LataCerveza(); 
+        cerveza.setAltura(Float.parseFloat(protocolRequest.getParameters().get(0).getValue()));
+        cerveza.setAncho(Float.parseFloat(protocolRequest.getParameters().get(1).getValue()));
+        cerveza.setPeso(Float.parseFloat(protocolRequest.getParameters().get(2).getValue()));
+        
+        cerveza = servicioItem.procesoMedicion(cerveza);
+        String respuesta = objectToJSON(cerveza);
+        output.println(respuesta);
         
     }
     private void processObtenerItemMedicion(Protocolo protocolRequest) {
         // Extraer la referencia del primer parámetro
         String ref = protocolRequest.getParameters().get(0).getValue();
-        Elemento elemento = servicio.obtenerItemMedicion(ref);
+        Elemento elemento = servicioItem.obtenerItemMedicion(ref);
         if (elemento == null) {
             String errorJson = generateNotFoundErrorJson();
             output.println(errorJson);
         } else {
-            output.println(objectToJSON(elemento));
+            output.println(objectToJSON((LataCerveza) elemento));
         }
     }
     /**
@@ -233,15 +258,15 @@ public class SistemaMedicionServidorSocket implements Runnable {
     }
 
     /**
-     * Convierte el objeto Customer a json para que el servidor lo envie como
+     * Convierte el objeto LataCerveza a json para que el servidor lo envie como
      * respuesta por el socket
      *
      * @param elemento elemento de medición 
      * @return customer en formato json
      */
-    private String objectToJSON(Elemento elemento) {
+    private String objectToJSON(LataCerveza cerveza) {
         Gson gson = new Gson();
-        String strObject = gson.toJson(elemento);
+        String strObject = gson.toJson(cerveza);
         return strObject;
     }
 

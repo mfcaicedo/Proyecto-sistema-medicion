@@ -51,24 +51,6 @@ public class ServicioItemMedicion {
         cerveza = objItemMedicion.procesarMedicion(cerveza);
         return cerveza;
     }
-    /**
-     * 
-     * @param cerveza
-     * @return 
-     */
-//    public LataCerveza recolectarDatos(LataCerveza cerveza){
-//        return objItemMedicion.recolectarDatos(cerveza);
-//    }
-//    /**
-//     * 
-//     * @param cerveza 
-//     */
-//    public void analisisDatos(LataCerveza cerveza){
-//        objItemMedicion.analisisDatos(cerveza);
-//    }
-//    public LataCerveza clasificarElemento(LataCerveza cerveza){
-//        return objItemMedicion.clasificarElemento(cerveza);
-//    }
      /**
      * Buscar un Elemento de Medición
      *

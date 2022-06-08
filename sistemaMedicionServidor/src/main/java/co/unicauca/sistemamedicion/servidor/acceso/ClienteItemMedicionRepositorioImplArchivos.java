@@ -15,7 +15,7 @@ public class ClienteItemMedicionRepositorioImplArchivos implements IClienteItemM
     /**
      * Devuelve una respuesta a la alerta generada por el cliente. 
      * @param alerta alerta que ha recibido desde el cliente 
-     * @return respuesta de que si recibió la alerta para realizar acciones
+     * @return respuesta de que si recibio la alerta para realizar acciones
      */
 //    @Override
 //    public String enviarAlerta(String alerta) {

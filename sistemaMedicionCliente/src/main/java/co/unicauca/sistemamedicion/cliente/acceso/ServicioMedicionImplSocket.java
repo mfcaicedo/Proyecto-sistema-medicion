@@ -1,4 +1,3 @@
-
 package co.unicauca.sistemamedicion.cliente.acceso;
 
 import co.unicauca.sistemamedicion.comun.dominio.Disparador;
